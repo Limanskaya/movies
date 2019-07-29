@@ -5,26 +5,42 @@
         android:layout_height="wrap_content" xmlns:tools="http://schemas.android.com/tools"
         android:padding="8dp"
         android:layout_margin="8dp"
-        android:background="@android:color/holo_blue_bright"
+        android:elevation="8dp"
+        android:background="@drawable/bg_white_rounded"
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView
             android:id="@+id/movieImage"
             android:layout_width="100dp"
             android:layout_height="150dp"
+            android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-            android:id="@+id/movieRuName"
-            android:layout_width="0dp"
+            android:id="@+id/movieDate"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textSize="14sp"
+            android:textColor="@android:color/holo_red_dark"
+            tools:text="Fast"/>
+
+    <TextView
+            android:id="@+id/movieRuName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/movieDate"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/movieImage"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@android:color/black"
             tools:text="Форсаж"/>
 
     <TextView
@@ -35,6 +51,9 @@
             app:layout_constraintTop_toBottomOf="@+id/movieRuName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/movieRuName"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif"
+            android:textColor="@android:color/black"
             tools:text="Fast"/>
 
     <TextView
@@ -42,7 +61,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
-            android:background="@android:color/holo_orange_dark"
+            android:textSize="14sp"
+            android:textColor="@android:color/white"
+            android:background="@drawable/bg_green_rounded"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:text="Fast"/>

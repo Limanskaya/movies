@@ -15,8 +15,6 @@ import www.movies.app.model.Movie
 
 class MovieFragment : Fragment() {
 
-
-
     private lateinit var movieViewModel: MovieViewModel
 
 
@@ -37,7 +35,7 @@ class MovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView?.layoutManager = LinearLayoutManager(context)
         recyclerView.setHasFixedSize(true)
 
         setObservers()
@@ -76,7 +74,7 @@ class MovieFragment : Fragment() {
 
 
     private fun onItemClick(movie: Movie) {
-
+        (activity as MainActivity).addFragment(MovieDetailsFragment.newInstance(movie))
     }
 
 

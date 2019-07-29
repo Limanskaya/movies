@@ -1,11 +1,11 @@
 package www.movies.app
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.*
 import www.movies.app.base.BaseRepository
 import www.movies.app.model.Movie
+import www.movies.app.model.MovieDetail
 import www.movies.app.net.RetrofitService
 import kotlin.coroutines.CoroutineContext
 
@@ -26,6 +26,8 @@ class MovieViewModel : ViewModel() {
 
     val errorLiveData = MutableLiveData<String>()
 
+    val movieDetailLiveData = MutableLiveData<MovieDetail>()
+
 
 
     fun fetchMovies() {
@@ -45,7 +47,27 @@ class MovieViewModel : ViewModel() {
                     errorLiveData.postValue(upcomingMovies.data.message)
                 }
             }
+        }
+    }
 
+
+    fun fetchMovieId(movieId: Int) {
+        scope.launch {
+
+            loadingLiveData.postValue(true)
+
+            when(val movieDetail = repository.getMovieId(movieId)) {
+
+                is BaseRepository.Result.Success -> {
+                    loadingLiveData.postValue(false)
+                    movieDetailLiveData.postValue(movieDetail.data)
+                }
+
+                is BaseRepository.Result.Error -> {
+                    loadingLiveData.postValue(false)
+                    errorLiveData.postValue(movieDetail.data.message)
+                }
+            }
         }
     }
 
