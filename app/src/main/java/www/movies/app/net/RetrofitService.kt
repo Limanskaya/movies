@@ -6,14 +6,18 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import www.movies.app.BuildConfig
 
 
 object RetrofitService {
 
+    private const val API_URL = BuildConfig.HOST_URL
+
     private val authInterceptor = Interceptor { chain ->
         val newUrl = chain.request().url()
             .newBuilder()
-            .addQueryParameter("api_key", "4dee19cf079cf1eec5d454cf78ab90f1")
+            .addQueryParameter("api_key", BuildConfig.API_KEY)
+            .addQueryParameter("language", "ru-RU")
             .build()
 
         val newRequest = chain.request()
@@ -40,7 +44,7 @@ object RetrofitService {
     private fun retrofit() : Retrofit = Retrofit.Builder()
         .addConverterFactory(MoshiConverterFactory.create())
         .addCallAdapterFactory(CoroutineCallAdapterFactory())
-        .baseUrl("https://api.themoviedb.org/3/")
+        .baseUrl(API_URL)
         .client(okHttpClient)
         .build()
 
