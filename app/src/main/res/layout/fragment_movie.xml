@@ -3,7 +3,8 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context=".fragments.MovieFragment">
+             android:background="#39cccccc"
+             tools:context=".ui.movie.MovieFragment">
 
 
     <ProgressBar

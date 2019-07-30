@@ -1,4 +1,4 @@
-package www.movies.app.fragments
+package www.movies.app.ui.movie
 
 
 import android.os.Bundle
@@ -11,11 +11,11 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_movie.*
 import kotlinx.android.synthetic.main.activity_main.*
-import www.movies.app.MainActivity
+import www.movies.app.ui.MainActivity
 import www.movies.app.adapters.MovieRvAdapter
-import www.movies.app.MovieViewModel
 import www.movies.app.R
 import www.movies.app.model.Movie
+import www.movies.app.ui.moviedetails.MovieDetailsFragment
 
 
 class MovieFragment : Fragment() {
@@ -53,7 +53,7 @@ class MovieFragment : Fragment() {
 
             recyclerView.apply {
                 val list: MutableList<Movie> = mutableListOf()
-                list.addAll(it)
+                list.addAll(it.sortedByDescending { it.releaseDate })
 
                 adapter = MovieRvAdapter(list) { movie: Movie -> onItemClick(movie) }
                 adapter?.notifyDataSetChanged()
@@ -82,6 +82,11 @@ class MovieFragment : Fragment() {
         (activity as MainActivity).addFragment(MovieDetailsFragment.newInstance(movie))
     }
 
+
+    override fun onStop() {
+        movieViewModel.cancelJob()
+        super.onStop()
+    }
 
     companion object {
         fun newInstance(): MovieFragment = MovieFragment()

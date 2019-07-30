@@ -1,9 +1,10 @@
-package www.movies.app
+package www.movies.app.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import www.movies.app.fragments.MovieFragment
+import www.movies.app.R
+import www.movies.app.ui.movie.MovieFragment
 
 class MainActivity : AppCompatActivity() {
 

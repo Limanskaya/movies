@@ -1,4 +1,4 @@
-package www.movies.app.fragments
+package www.movies.app.ui.moviedetails
 
 
 import android.os.Bundle
@@ -13,9 +13,9 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_movie_details.*
 import kotlinx.android.synthetic.main.fragment_movie_details.progressBar
-import www.movies.app.MainActivity
+import www.movies.app.ui.MainActivity
 import www.movies.app.adapters.MovieGenreRvAdapter
-import www.movies.app.MovieViewModel
+import www.movies.app.ui.movie.MovieViewModel
 import www.movies.app.R
 import www.movies.app.model.Genre
 import www.movies.app.model.Movie
@@ -55,12 +55,18 @@ class MovieDetailsFragment : Fragment() {
         movieViewModel.movieDetailLiveData.observe(this, Observer {
             (activity as MainActivity).errorView.visibility = View.GONE
 
-            if (it.haveRating) {
-                movieVoteAverage.text = it.voteAverage.toString()
-            } else movieVoteAverage.visibility = View.INVISIBLE
-
             movieName.text = it.title
             movieOverview.text = it.overview
+
+
+            if (it.haveRating) {
+                movieVoteAverage.text = it.voteAverage.toString()
+                movieVoteAverage.visibility = View.VISIBLE
+            } else movieVoteAverage.visibility = View.INVISIBLE
+
+            if (movieOverview.text.isNotEmpty()) {
+                movieOverview.visibility = View.VISIBLE
+            } else movieOverview.visibility = View.INVISIBLE
 
             Picasso.get()
                     .load("https://image.tmdb.org/t/p/w500" + it.posterPath)
@@ -94,6 +100,14 @@ class MovieDetailsFragment : Fragment() {
     private fun fetchMovieId() {
         progressBar.visibility = View.VISIBLE
         movieId?.let { movieViewModel.fetchMovieDetail(it) }
+    }
+
+
+    override fun onStop() {
+        (activity as MainActivity).errorView.visibility = View.GONE
+
+        movieViewModel.cancelJob()
+        super.onStop()
     }
 
 

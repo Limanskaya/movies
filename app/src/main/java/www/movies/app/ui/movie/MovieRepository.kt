@@ -1,4 +1,4 @@
-package www.movies.app
+package www.movies.app.ui.movie
 
 import www.movies.app.model.MovieResponse
 import www.movies.app.net.API

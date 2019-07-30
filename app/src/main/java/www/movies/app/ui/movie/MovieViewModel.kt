@@ -1,4 +1,4 @@
-package www.movies.app
+package www.movies.app.ui.movie
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,6 +7,7 @@ import www.movies.app.base.BaseRepository
 import www.movies.app.model.Movie
 import www.movies.app.model.MovieDetail
 import www.movies.app.net.RetrofitService
+import www.movies.app.ui.movie.MovieRepository
 import kotlin.coroutines.CoroutineContext
 
 class MovieViewModel : ViewModel() {
@@ -71,7 +72,6 @@ class MovieViewModel : ViewModel() {
         }
     }
 
-
-    fun cancelAllRequests() = coroutineContext.cancel()
+    fun cancelJob() = parentJob.cancel()
 
 }
