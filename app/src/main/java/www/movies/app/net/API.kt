@@ -13,5 +13,5 @@ interface API {
     fun getUpcomingMovies() : Deferred<Response<MovieResponse>>
 
     @GET("movie/{movie_id}")
-    fun getMovieId(@Path("movie_id") movieId: Int) : Deferred<Response<MovieDetail>>
+    fun getMovieDetails(@Path("movie_id") movieId: Int) : Deferred<Response<MovieDetail>>
 }

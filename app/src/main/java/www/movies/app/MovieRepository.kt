@@ -16,7 +16,7 @@ class MovieRepository(private val api : API) : BaseRepository() {
 
     suspend fun getMovieId(movieId: Int): Result<MovieDetail, ErrorMessage> {
         return safeApiCall(
-            call = { api.getMovieId(movieId).await() }
+            call = { api.getMovieDetails(movieId).await() }
         )
     }
 

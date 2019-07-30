@@ -1,4 +1,4 @@
-package www.movies.app
+package www.movies.app.fragments
 
 
 import android.os.Bundle
@@ -10,6 +10,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_movie.*
+import kotlinx.android.synthetic.main.activity_main.*
+import www.movies.app.MainActivity
+import www.movies.app.adapters.MovieRvAdapter
+import www.movies.app.MovieViewModel
+import www.movies.app.R
 import www.movies.app.model.Movie
 
 
@@ -44,21 +49,21 @@ class MovieFragment : Fragment() {
 
     private fun setObservers() {
         movieViewModel.upcomingMoviesLiveData.observe(this, Observer {
-            errorView.visibility = View.GONE
+            (activity as MainActivity).errorView.visibility = View.GONE
 
             recyclerView.apply {
                 val list: MutableList<Movie> = mutableListOf()
                 list.addAll(it)
 
-                adapter = MovieRvAdapter(list) { movie : Movie -> onItemClick(movie) }
+                adapter = MovieRvAdapter(list) { movie: Movie -> onItemClick(movie) }
                 adapter?.notifyDataSetChanged()
             }
         })
 
         movieViewModel.errorLiveData.observe(this, Observer {
             progressBar.visibility = View.GONE
-            errorView.visibility = View.VISIBLE
-            errorLabel.text = movieViewModel.errorLiveData.value
+            (activity as MainActivity).errorView.visibility = View.VISIBLE
+            (activity as MainActivity).errorLabel.text = movieViewModel.errorLiveData.value
         })
 
         movieViewModel.loadingLiveData.observe(this, Observer {

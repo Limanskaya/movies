@@ -51,7 +51,7 @@ class MovieViewModel : ViewModel() {
     }
 
 
-    fun fetchMovieId(movieId: Int) {
+    fun fetchMovieDetail(movieId: Int) {
         scope.launch {
 
             loadingLiveData.postValue(true)

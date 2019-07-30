@@ -1,4 +1,4 @@
-package www.movies.app
+package www.movies.app.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,27 +7,28 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import www.movies.app.model.Movie
 import kotlinx.android.synthetic.main.movie_list_item.view.*
+import www.movies.app.R
 
 class MovieRvAdapter(
     private val items: List<Movie>,
     private val itemClickListener: (Movie) -> Unit
-) : RecyclerView.Adapter<ViewHolder>() {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
 
     override fun getItemCount(): Int = items.size
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.movie_list_item, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return MovieViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.movie_list_item, parent, false))
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position], itemClickListener)
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        (holder as MovieViewHolder).bind(items[position], itemClickListener)
     }
 
 }
 
-class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
+class MovieViewHolder (view: View) : RecyclerView.ViewHolder(view) {
 
     fun bind(movie: Movie, itemClickListener: (Movie) -> Unit) {
 
