@@ -33,7 +33,7 @@ class MovieViewHolder (view: View) : RecyclerView.ViewHolder(view) {
     fun bind(movie: Movie, itemClickListener: (Movie) -> Unit) {
 
         Picasso.get()
-            .load("https://image.tmdb.org/t/p/w185/" + movie.posterPath)
+            .load(IMAGE_PATH_W185 + movie.posterPath)
             .placeholder(R.drawable.image_placeholder)
             .error(R.drawable.image_placeholder)
             .into(itemView.movieImage)
@@ -48,6 +48,10 @@ class MovieViewHolder (view: View) : RecyclerView.ViewHolder(view) {
 
         itemView.setOnClickListener { itemClickListener(movie) }
 
+    }
+
+    companion object {
+        const val IMAGE_PATH_W185 = "https://image.tmdb.org/t/p/w185/"
     }
 }
 

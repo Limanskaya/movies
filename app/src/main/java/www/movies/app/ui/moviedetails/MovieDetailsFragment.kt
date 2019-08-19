@@ -69,7 +69,7 @@ class MovieDetailsFragment : Fragment() {
             } else movieOverview.visibility = View.INVISIBLE
 
             Picasso.get()
-                    .load("https://image.tmdb.org/t/p/w500" + it.posterPath)
+                    .load(IMAGE_PATH_W500 + it.posterPath)
                     .placeholder(R.drawable.image_placeholder)
                     .error(R.drawable.image_placeholder)
                     .into(movieImage)
@@ -113,6 +113,8 @@ class MovieDetailsFragment : Fragment() {
 
     companion object {
         const val MOVIE_ID = "movie_id"
+        const val IMAGE_PATH_W500 = "https://image.tmdb.org/t/p/w500"
+
 
         fun newInstance(movie: Movie): MovieDetailsFragment {
             val fragment = MovieDetailsFragment()

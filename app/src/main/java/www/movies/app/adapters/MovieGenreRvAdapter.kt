@@ -13,7 +13,7 @@ class MovieGenreRvAdapter(
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount() = items.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return GenreViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.movie_genre_list_item, parent, false))
